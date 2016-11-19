@@ -2,7 +2,8 @@
 (Because I don't like netctl)
 
 
-Make sure you change $wificonf to a real path.
+Make sure you change $wificonf to the path of your config file, and $interface
+to the name of your NIC.
 
 ## Fatal Assumptions
 - Bash is installed :)
