@@ -2,6 +2,7 @@
 
 # global defs
 wificonf="/home/elb/wifi.conf"
+interface="wlp58s0"
 
 # function defs
 fn_disconnect () {
@@ -17,8 +18,8 @@ fn_connect () {
             echo \`$0 edit\` to change SSID/credentials.
             exit 0;;
         * )
-            sudo wpa_supplicant -B -d nl80211 -c $wificonf -i wlp58s0;
-            sudo dhclient wlp58s0;;
+            sudo wpa_supplicant -B -d nl80211 -c $wificonf -i $interface;
+            sudo dhclient $interface;;
     esac
 }
 fn_usage () {
