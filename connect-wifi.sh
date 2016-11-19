@@ -8,6 +8,7 @@ interface="wlp58s0"
 fn_disconnect () {
     pgrep wpa_supplicant | xargs sudo kill 2>/dev/null;
     pgrep dhclient | xargs sudo kill 2>/dev/null;
+    sudo ip addr flush dev $interface
 }
 fn_connect () {
     cat $wificonf
@@ -18,7 +19,8 @@ fn_connect () {
             echo \`$0 edit\` to change SSID/credentials.
             exit 0;;
         * )
-            sudo wpa_supplicant -B -d nl80211 -c $wificonf -i $interface;
+            sudo wpa_supplicant -B nl80211 -c $wificonf -i $interface;
+            echo Initializing DHCP client...
             sudo dhclient $interface;;
     esac
 }
