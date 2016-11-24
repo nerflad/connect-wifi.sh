@@ -34,11 +34,11 @@ fn_usage () {
 
 # control flow
 case $1 in
-    "show" )
+    "show"|"s" )
         cat $wificonf;;
-    "edit" )
+    "edit"|"e" )
         vim $wificonf;;
-    "connect" )
+    "connect"|"c" )
         if pgrep wpa_supplicant > /dev/null && pgrep dhclient > /dev/null; then
             echo Reconnecting...
             fn_disconnect;
@@ -47,7 +47,7 @@ case $1 in
             echo Connecting...
         fi
         fn_connect;;
-    "disconnect"|"kill" )
+    "disconnect"|"kill"|"d"|"k" )
         echo Disconnecting...
         fn_disconnect;;
     * )
