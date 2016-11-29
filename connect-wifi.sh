@@ -6,11 +6,13 @@ interface="wlp58s0"
 
 # function defs
 fn_disconnect () {
+    echo Disconnecting...
     pgrep wpa_supplicant | xargs sudo kill 2>/dev/null;
     pgrep dhclient | xargs sudo kill 2>/dev/null;
     sudo ip addr flush dev $interface
 }
 fn_connect () {
+    printf 'Connecting...\n\n'
     cat $wificonf
     read -p "Continue? (Y/n): " choice
     case $choice in
@@ -40,15 +42,11 @@ case $1 in
         vim $wificonf;;
     "connect"|"c" )
         if pgrep wpa_supplicant > /dev/null && pgrep dhclient > /dev/null; then
-            echo Reconnecting...
             fn_disconnect;
             sleep 3;
-        else
-            echo Connecting...
         fi
         fn_connect;;
     "disconnect"|"kill"|"d"|"k" )
-        echo Disconnecting...
         fn_disconnect;;
     * )
         fn_usage;
